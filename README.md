@@ -4,7 +4,7 @@ It checks "www.zone-h.org/archive" and looks for your domain, if your assets wer
 # Installation
 Python >= 3.9
 ```
-git clone https://github.com/amir-morshedizadeh/zoneH_checker/zoneH_checker.git
+git clone https://github.com/amir-morshedizadeh/zone-H-checker.git
 pip3 install -r requirements.txt
 ```
 
