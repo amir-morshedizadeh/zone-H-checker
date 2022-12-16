@@ -1,5 +1,5 @@
 # zoneH_checker
-It checks "www.zone-h.org/archive" and looks for your domain, if your assets were in the list, it sends the log to your Telegram/Bale group.
+It checks "www.zone-h.org/archive" and looks for your domain, if your assets found in the list, it sends the log to your Telegram/Bale group.
 
 # Installation
 Python >= 3.9
