@@ -1,4 +1,4 @@
-# zoneH_checker
+# zone-H-checker
 It checks "www.zone-h.org/archive" and looks for your domain, if your assets found in the list, it sends the log to your Telegram/Bale group.
 
 # Installation
