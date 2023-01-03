@@ -16,13 +16,13 @@ pip3 install -r requirements.txt
 ###### Bale:  [Bale Bot](https://dev.bale.ai/quick-start)
 
 2- Make a group in Telegram/Bale then write your token and group id in the following portion of the code:
-![image](https://user-images.githubusercontent.com/83567836/206893416-305562ae-3dc8-40c5-a134-2f5806bf93f7.png)
+![image](https://user-images.githubusercontent.com/83567836/210405957-01ca30e4-cbeb-49c6-a99d-d195a791943a.png)
 
 3- Through your browser navigate to https://www.zone-h.org/archive,
-then press F12 to see your cookie to write PHPSESSID value to .PHPSESSID file and ZHE value to .ZHE file in the script path
+then press F12 to see your cookie to write PHPSESSID value to .PHPSESSID file and ZHE value to .ZHE file in the script path.
 ![image](https://user-images.githubusercontent.com/83567836/206893340-773d844c-bc31-4975-aee8-cb5fbb1b6715.png)
 
-4- Make a regex to cover all your domains and replace it with the value of current regex
+4- Make a regex to cover all your domains and replace it with the value of current regex.
 ![image](https://user-images.githubusercontent.com/83567836/206894505-f42a81fa-ab39-4d45-ad5f-d24629300f4b.png)
 
-5- Run the program and monitor the Telegram group for any incoming alerts and also solving the captcha
+5- Run the program and monitor the Telegram group for any incoming alerts and also solving the captcha.
