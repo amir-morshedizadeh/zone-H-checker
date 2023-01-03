@@ -1,6 +1,7 @@
-beautifulsoup4>=4.11.1
-pil>=1.1.6
-requests>=2.27.1
-telegram>=0.0.1
-urllib3>=1.26.9
-python-telegram-bot>=12.8
+beautifulsoup4==4.11.1
+fake_useragent==1.1.1
+pil==1.1.6
+requests==2.27.1
+telegram==0.0.1
+urllib3==1.26.9
+watchgod==0.8.2              
