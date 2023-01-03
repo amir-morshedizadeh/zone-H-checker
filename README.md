@@ -1,5 +1,6 @@
 # zone-H-checker
-It checks "www.zone-h.org/archive" and looks for your domain, if your assets found in the list, it sends the log to your Telegram/Bale group.
+It checks "www.zone-h.org/archive" and looks for your domain, if your assets found in the list, it sends the alert to your Telegram/Bale group.
+It also sends captcha image of zone-h.org to your Telegram group in order to enter the captcha text to continue for looking.
 
 # Installation
 Python >= 3.9
@@ -24,3 +25,4 @@ then press F12 to see your cookie to write PHPSESSID value to .PHPSESSID file an
 4- Make a regex to cover all your domains and replace it with the value of current regex
 ![image](https://user-images.githubusercontent.com/83567836/206894505-f42a81fa-ab39-4d45-ad5f-d24629300f4b.png)
 
+5- Run the program and monitor the Telegram group for any incoming alerts and also solving the captcha
