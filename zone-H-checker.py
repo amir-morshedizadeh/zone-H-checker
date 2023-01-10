@@ -12,7 +12,6 @@ import requests
 from requests.adapters import HTTPAdapter
 from pil import Image
 from fake_useragent import UserAgent
-import random
 from bs4 import BeautifulSoup
 import threading
 import telegram.error
@@ -48,7 +47,6 @@ headers1 = {'User-Agent': ua.random,
 'Origin': 'http://www.zone-h.org',
 'Connection': 'keep-alive',
 'Referer': 'http://www.zone-h.org/archive'}
-
 
 # Bot Class
 class mybot:
@@ -91,14 +89,14 @@ class mybot:
             except Unauthorized:
                 # The user has removed or blocked the bot.
                 update_id += 1
-
+    
+    # Starting a thread for mybot Class
     def run(self):
         t1 = threading.Thread(target=self.main)
         t1.start()
         print(t1.getName)    
 
-
-
+        
 # Main Class
 class main:
     def __init__(self, PHPSESSID, ZHE):
@@ -158,34 +156,37 @@ class main:
 
         # Checking if captcha is required.
         while '''<input type="text" name="captcha"''' in response.text:
-            print('Captcha')
-            session = self.requests_retry_session()
-            # Saving the captcha image on the disk and sending it to the messenger.
-            img = session.get('http://www.zone-h.org/captcha.py')
-            img = io.BytesIO(img.content)
-            img = Image.open(img)
-            img.save("captcha.png")
-            files = {'photo': open('captcha.png', 'rb')}
-            r = session.post(telegram_api_sendphoto, data={'chat_id': telegram_group_id_zone_h, 'caption': 'Please type what you see!'}, files=files)
-            print('Trying to send captcha image to Bale ' + str(r))
-            # Reading the captcha from captcha.txt and sending it to zone-h.org.
-            print('Waiting for entering the captcha!')
-            def watchgod_file(self):
-                with open('captcha.txt', 'r') as file:
-                    captcha_txt = file.read().encode(encoding='utf-8', errors='ignore')
-                    captcha_txt = {'captcha': captcha_txt}
-                    print('Captcha inside the file is: ' + str(captcha_txt))
-                    r1 = session.post(self.Url, data=captcha_txt, cookies=cookies, headers=headers1)
-                    print('Trying to send the captcha to Zone-h.org: ' + str(r))
-                    if '''<input type="text" name="captcha"''' in r1.text:
-                        response = session.get(url=url, cookies=cookies, headers=headers1)
-                    else:
-                        return
-            for changes in watch('captcha.txt'):
-                print(changes)
-                watchgod_file(self)
+            try:
+                print('Captcha')
+                session = self.requests_retry_session()
+                # Saving the captcha image on the disk and sending it to the messenger.
+                img = session.get('http://www.zone-h.org/captcha.py')
+                img = io.BytesIO(img.content)
+                img = Image.open(img)
+                img.save("captcha.png")
+                files = {'photo': open('captcha.png', 'rb')}
+                r = session.post(telegram_api_sendphoto, data={'chat_id': telegram_group_id_zone_h, 'caption': 'Please type what you see!'}, files=files)
+                print('Trying to send captcha image to Bale ' + str(r))
+                # Reading the captcha from captcha.txt and sending it to zone-h.org.
+                print('Waiting for entering the captcha!')
+                def watchgod_file(self):
+                    with open('captcha.txt', 'r') as file:
+                        captcha_txt = file.read().encode(encoding='utf-8', errors='ignore')
+                        captcha_txt = {'captcha': captcha_txt}
+                        print('Captcha inside the file is: ' + str(captcha_txt))
+                        r1 = session.post(self.Url, data=captcha_txt, cookies=cookies, headers=headers1)
+                        print('Trying to send the captcha to Zone-h.org: ' + str(r))
+                        if '''<input type="text" name="captcha"''' in r1.text:
+                            response = session.get(url=url, cookies=cookies, headers=headers1)
+                        else:
+                            return
+                for changes in watch('captcha.txt'):
+                    print(changes)
+                    watchgod_file(self)
+                    break
                 break
-            break
+            except ValueError as err:
+                print(err)
         # Checking for cookie validation, if new cookie is set, write it manually inside .PHPSESSID and .ZHE files.
         if '''<html><body>-<script type="text/javascript"''' in response.text:
             print('Maybe Error PHPSESSID && ZHE')
@@ -241,51 +242,64 @@ class main:
             print("Total Pages of today in zone-h.org: ", length)
             j = 0
             while j <= length:
-                j += 1
-                self.Url = 'http://www.zone-h.org/archive/page=' + str(j)
-                soup = self.request(self.Url)
-                soup = self.get_assets(soup)
-                self.send_to_messenger(soup)
-                time.sleep(1)
+                try:
+                    j += 1
+                    self.Url = 'http://www.zone-h.org/archive/page=' + str(j)
+                    soup = self.request(self.Url)
+                    soup = self.get_assets(soup)
+                    self.send_to_messenger(soup)
+                    time.sleep(1)
+                except ValueError as err:
+                    print(err)
 
     # Looping forever.
     def start(self):
         while True:
-            self.Url = 'http://www.zone-h.org/archive'
-            print("Starting")
-            soup = self.request(self.Url)
-            self.setup(soup)
-            print("Waiting 180s for re-scraping")
-            time.sleep(108)
-
+            try:
+                self.Url = 'http://www.zone-h.org/archive'
+                print("Starting")
+                soup = self.request(self.Url)
+                self.setup(soup)
+                print("Waiting 180s for re-scraping")
+                time.sleep(108)
+            except ValueError as err:
+                print(err)
+    
+    # Starting a thread for Main Class
     def run(self):
-        t2 = threading.Thread(target=self.start)
-        t2.start()
-        print(t2.getName)
+        try:
+            t2 = threading.Thread(target=self.start)
+            t2.start()
+            print(t2.getName)
+        except ValueError as err:
+            print(err)
 
 if __name__ == '__main__':
-    if os.path.isfile('captcha.txt'):
-        pass
-    else:
-        open('captcha.txt', 'w+')
+    try:
+        if os.path.isfile('captcha.txt'):
+            pass
+        else:
+            open('captcha.txt', 'w+')
 
-    if os.path.isfile('Results.txt'):
-        results = os.path.basename('Results.txt')
-        results = str(results)
-    else:
-        results = open('Results.txt', 'w+')
+        if os.path.isfile('Results.txt'):
+            results = os.path.basename('Results.txt')
+            results = str(results)
+        else:
+            results = open('Results.txt', 'w+')
 
-    if os.path.isfile('.PHPSESSID'):
-        PHPSESSID = open('.PHPSESSID', 'r').read().strip()
-    else:
-        PHPSESSID = ''
+        if os.path.isfile('.PHPSESSID'):
+            PHPSESSID = open('.PHPSESSID', 'r').read().strip()
+        else:
+            PHPSESSID = ''
 
-    if os.path.isfile('.ZHE'):
-        ZHE = open('.ZHE', 'r').read().strip()
-    else:
-        ZHE = ''
-    cookies = {'PHPSESSID': PHPSESSID, 'ZHE': ZHE}
-    e = mybot()
-    e.run()
-    d = main(PHPSESSID, ZHE)
-    d.run()
+        if os.path.isfile('.ZHE'):
+            ZHE = open('.ZHE', 'r').read().strip()
+        else:
+            ZHE = ''
+        cookies = {'PHPSESSID': PHPSESSID, 'ZHE': ZHE}
+        e = mybot()
+        e.run()
+        d = main(PHPSESSID, ZHE)
+        d.run()
+    except ValueError as err:
+        print(err)
