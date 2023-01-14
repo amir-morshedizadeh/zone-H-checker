@@ -104,21 +104,21 @@ class main:
         self.PHPSESSID = PHPSESSID
         self.ZHE = ZHE
 
-    def requests_retry_session(self,
-            retries=3,
-            session=None,
-    ):
+    def requests_retry_session(self, retries=3, session=None):
         session = session or requests.Session()
-        retry = Retry(
-            total=3,
-            read=2,
-            connect=5,
-            backoff_factor=1
-        )
-        adapter = HTTPAdapter(max_retries=retry)
-        session.mount('http://', adapter)
-        session.mount('https://', adapter)
-        return session
+        try:
+            retry = Retry(
+                total=3,
+                read=2,
+                connect=5,
+                backoff_factor=1
+            )
+            adapter = HTTPAdapter(max_retries=retry)
+            session.mount('http://', adapter)
+            session.mount('https://', adapter)
+            return session
+        except ValueError as err:
+            print(err)
 
     # Saving results from zone-h.org to "Results.txt".
     def save(self, x):
