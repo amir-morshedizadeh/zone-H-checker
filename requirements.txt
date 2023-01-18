@@ -1,5 +1,5 @@
 beautifulsoup4==4.11.1
-fake_useragent==1.1.1
+fake-useragent==1.1.1
 pil==1.1.6
 requests==2.27.1
 telegram==0.0.1
